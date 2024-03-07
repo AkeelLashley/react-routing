@@ -6,13 +6,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Contact from "./pages/Contact";
-import Navbar from "./components/Navbar";
 import NotFound from "./components/NotFound";
+import { Layout } from "./components/Layout";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Navbar />,
+    element: <Layout />,
     errorElement: <NotFound />,
     children: [
       {
@@ -20,13 +20,21 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/profile",
+        path: "/users",
         element: <Profile />,
       },
+      // {
+      //   path: "/users/:id",
+      //   element: <UserDetail />,
+      // },
       {
         path: "/contact",
         element: <Contact />,
       },
+      // {
+      //   path: "/account",
+      //   element,
+      // },
     ],
   },
   {
