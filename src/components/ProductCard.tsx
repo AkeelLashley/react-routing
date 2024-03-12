@@ -4,36 +4,43 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { RatingType } from "../types/products";
 
 interface ProductCardProps {
   image: string;
-  name: string;
+  title: string;
   description: string;
-  price: string;
-  rating: number;
+  price: number;
+  category: string;
+  rating: RatingType;
 }
+
 export default function ProductCard({
   image,
-  name,
+  title,
   description,
+  category,
   price,
   rating,
 }: ProductCardProps) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia sx={{ height: 140 }} image={image} title={name} />
+    <Card sx={{ maxWidth: 250 }}>
+      <CardMedia sx={{ height: 100 }} image={image} title={title} />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {name}
+          {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {description}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {price}
+          Price: {price}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {rating}
+          Category: {category}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Ratings: {rating.count} {rating.rate}
         </Typography>
       </CardContent>
       <CardActions>

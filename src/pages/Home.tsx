@@ -1,28 +1,36 @@
+import { useState, useEffect } from "react";
+import { getAllProducts } from "../api/productApi";
 import ProductCard from "../components/ProductCard";
-import image1 from "../assets/image1.jpg";
-import products from "../data/products.json";
+import { ProductType } from "../types/products";
 
 const Home = () => {
-  const productsArray = products.products.data.items;
+  const [products, setProducts] = useState<ProductType[]>([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await getAllProducts();
+        setProducts(response.data);
+        console.log("Fetching Data");
+      } catch (err) {
+        console.error("Error fetching products:", err);
+      }
+    };
+    fetchProducts();
+  }, []);
+
   return (
     <>
-      {productsArray.map((product) => (
+      {products.map((product) => (
         <ProductCard
-          image={image1}
-          name={product.name}
+          image={product.image}
+          title={product.title}
           description={product.description}
           price={product.price}
-          rating={4.5}
+          rating={product.rating}
+          category={product.category}
         />
       ))}
-
-      {/* <ProductCard
-        image={image1}
-        name="John Doe"
-        description="This is a description."
-        price={99.99}
-        rating={4.5}
-      /> */}
     </>
   );
 };
